@@ -1,0 +1,67 @@
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.title {
+    text-align: center;
+    color: #191926;
+    font-size: 40px;
+    margin: 30px 0 0;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin: 30px 0 0;
+}
+
+#game-field {
+    display: grid;
+    grid-template-rows: repeat(10, 40px);
+    grid-template-columns: repeat(10, 40px);
+    box-shadow: 0 0 6px #929292;
+    gap: 1px;
+    margin-top: 30px;
+}
+
+.gamer1 {
+    background-color: #d42f2f;
+}
+
+.gamer2 {
+    background-color: #569e34;
+}
+
+.cell {
+    border: 1px solid #4d8da0;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.cell:hover {
+    cursor: pointer;
+    background-color: #d7e2ec;
+    background-image: url("./images/arrow.png");
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    right: 75%;
+    bottom: 75%;
+    z-index: 3;
+}
