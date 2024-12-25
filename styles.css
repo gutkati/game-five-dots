@@ -41,6 +41,14 @@ body {
     background-color: #569e34;
 }
 
+.red {
+    color: #d42f2f;
+}
+
+.green {
+    color: #569e34;
+}
+
 .cell {
     border: 1px solid #4d8da0;
     width: 40px;

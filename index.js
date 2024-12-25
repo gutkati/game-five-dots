@@ -1,10 +1,12 @@
 let gameField = document.querySelector('#game-field')
+let colorIndicator = document.querySelector('#color-indicator span')
 const winGamer = 5
 
 let numberRows = 10
 let numberColumns = 10
 
 let arrGamers = ['gamer1', 'gamer2']
+let arrColorsGamers = ['red', 'green']
 
 let arrMoveGamer1 = []
 let arrMoveGamer2 = []
@@ -44,6 +46,11 @@ function handleCellClick(e) {
     if (numGamer == arrGamers.length) {
         numGamer = 0
     }
+
+    // Поменять имя игрока и цвет имени игрока
+    colorIndicator.textContent = `${arrGamers[numGamer] === 'gamer1' ? 'Красный' : 'Зеленый'}`
+    colorIndicator.classList.remove('red', 'green')
+    colorIndicator.classList.add(arrColorsGamers[numGamer])
 }
 
 showGameField()
