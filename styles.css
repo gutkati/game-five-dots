@@ -24,14 +24,60 @@ body {
     margin: 30px 0 0;
 }
 
-#game-field {
-    display: grid;
-    grid-template-rows: repeat(10, 40px);
-    grid-template-columns: repeat(10, 40px);
-    box-shadow: 0 0 6px #929292;
-    gap: 1px;
+.container__field {
+    width: 401px;
+    height: 401px;
+    position: relative;
     margin-top: 30px;
 }
+
+.field {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #4d8da0 1px, transparent 1px),
+    linear-gradient(to bottom, #4d8da0 1px, transparent 1px);
+    background-size: 40px 40px; /* Размер клетки */
+    background-color: #fff; /* Фон поля */
+    box-shadow: 0 0 6px #929292;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+#game-field {
+    width: 351px;
+    height: 351px;
+    display: grid;
+    grid-template-rows: repeat(9, 30px);
+    grid-template-columns: repeat(9, 30px);
+    gap: 10px;
+    position: absolute;
+    top: 6%;
+    left: 6%;
+}
+
+.cell {
+    position: relative;
+    right: 0;
+    bottom: 0;
+}
+
+.cell:hover {
+    cursor: pointer;
+    background-color: #f2f4f6;
+    border-radius: 50%;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    right: 15%;
+    bottom: 16%;
+    z-index: 3;
+}
+
 
 .gamer1 {
     background-color: #d42f2f;
@@ -49,27 +95,3 @@ body {
     color: #569e34;
 }
 
-.cell {
-    border: 1px solid #4d8da0;
-    width: 40px;
-    height: 40px;
-    position: relative;
-}
-
-.cell:hover {
-    cursor: pointer;
-    background-color: #d7e2ec;
-    background-image: url("./images/arrow.png");
-    background-repeat: no-repeat;
-    background-position: 5px 5px;
-}
-
-.dot {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute;
-    right: 75%;
-    bottom: 75%;
-    z-index: 3;
-}
