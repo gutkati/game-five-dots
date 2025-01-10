@@ -20,6 +20,7 @@ function showGameField() {
 }
 
 startOver.addEventListener('click', function () {
+    showWinner.classList.remove('end-game_visible')
     resetGamer()
 })
 
@@ -44,7 +45,7 @@ function handleCellClick(e) {
     const dot = document.createElement('div')
     dot.classList.add('dot', arrGamers[numGamer])
     cell.appendChild(dot)
-    // отменить клик
+//     отменить клик
     cell.removeEventListener('click', handleCellClick)
 
     if (arrGamers[numGamer] === 'gamer1') {
