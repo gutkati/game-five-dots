@@ -7,20 +7,43 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="title">Игра "5 точек в ряд"</h1>
-    <p id="color-indicator" class="subtitle">Ходит: <span class="red">Красный</span></p>
+    <header class="header">
+        <div class="box__logo">
+            <div class="logo"></div>
+            <span class="info__text">Екатерина Шмелева</span>
+        </div>
+
+        <h1 id="open-title" class="title">Игра <span>5 точек в ряд</span></h1>
+        <div class="box__logo">
+            <button class="start-over">Начать заново</button>
+            <span class="info__text rules">Правила игры</span>
+        </div>
+
+    </header>
+
+    <p id="color-indicator" class="subtitle">ходит: <span class="red">Красный</span></p>
 
     <div class="container__field">
         <div class="field"></div>
         <div id="game-field"></div>
-        <div class="end-game">
-            <div class="close"></div>
+
+        <div class="end-game popup">
+            <div id="close-end" class="close"></div>
             <h2 class="name-gamer">Победил: <span></span></h2>
         </div>
 
+        <div class="rules-game popup">
+            <div id="close-rules" class="close"></div>
+            <h3 class="title">Правила игры</h3>
+            <p class="rules-game__text"><b>Участники</b> : Два игрока. Один играет красной точкой, другой – зеленой точкой.<br/>
+                <b>Ход игры</b> : Игроки по очереди делают ходы, ставя свою точку в свободную клетку.<br/>
+                <b>Победа</b> : Игрок побеждает, если первым составит ряд из 5 точек по прямой линии (горизонтальной,
+                вертикальной или диагональной).<br/>
+                <b>Ничья</b> : Игра считается завершённой вничью, если все клетки заполнены, и ряд из 5 точек ни у кого не
+                составился.</p>
+        </div>
     </div>
 
-    <button class="start-over">Начать заново</button>
 
 </div>
 

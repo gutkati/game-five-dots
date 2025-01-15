@@ -1,12 +1,18 @@
 let gameField = document.querySelector('#game-field')
 let colorIndicator = document.querySelector('#color-indicator span')
 let showWinner = document.querySelector('.end-game')
-let close = document.querySelector('.close')
+let closeEnd = document.querySelector('#close-end')
 let nameGamer = document.querySelector('.name-gamer span')
 let startOver = document.querySelector('.start-over')
+let rulesGame = document.querySelector('.rules')
+let infoText = document.querySelector('.rules-game')
+let CloseRules = document.querySelector('#close-rules')
+let OpenTitle = document.querySelector('#open-title')
+
 
 const winGamer = 5
-let fieldSize = 9
+let pointRow = 10
+let pointCol = 17
 let numGamer = 0
 
 let arrGamers = ['gamer1', 'gamer2']
@@ -16,17 +22,12 @@ let arrMoveGamer1 = []
 let arrMoveGamer2 = []
 
 function showGameField() {
-    getGameField(fieldSize)
+    getGameField(pointRow, pointCol)
 }
 
-startOver.addEventListener('click', function () {
-    showWinner.classList.remove('end-game_visible')
-    resetGamer()
-})
-
-function getGameField(fieldSize) {
-    for (let row = 0; row < fieldSize; row++) {
-        for (let col = 0; col < fieldSize; col++) {
+function getGameField(pointRow, pointCol) {
+    for (let row = 0; row < pointRow; row++) {
+        for (let col = 0; col < pointCol; col++) {
             let cell = document.createElement('div')
             cell.classList.add('cell')
             cell.dataset.row = row;
@@ -63,7 +64,7 @@ function handleCellClick(e) {
             return
         }
     }
-    
+
     // поменять номер игрока
     numGamer++
     if (numGamer === arrGamers.length) {
@@ -116,7 +117,7 @@ function endGame(name, color) {
     showWinner.classList.add('end-game_visible')
     nameGamer.textContent = name
     nameGamer.classList.add(color)
-    close.addEventListener('click', function () {
+    closeEnd.addEventListener('click', function () {
         showWinner.classList.remove('end-game_visible')
     })
 }
@@ -131,6 +132,22 @@ function resetGamer() {
     colorIndicator.textContent = "Красный"
     gameField.classList.remove('blocked')
     showGameField()
+}
+
+startOver.addEventListener('click', function () {
+    showWinner.classList.remove('end-game_visible')
+    resetGamer()
+})
+
+rulesGame.addEventListener('click', showPopupRulesGame)
+
+OpenTitle.addEventListener('click', showPopupRulesGame)
+
+function showPopupRulesGame() {
+    infoText.classList.add('rules-game_visible')
+    CloseRules.addEventListener('click', function () {
+        infoText.classList.remove('rules-game_visible')
+    })
 }
 
 showGameField()
