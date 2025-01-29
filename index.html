@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Пять точек в ряд — увлекательная логическая игра, где игроки по очереди ставят точки на игровое поле, стараясь выстроить пять в ряд первыми.">
     <title>Игра пять точек в ряд</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/png" href="./images/favicon.png">
 </head>
 <body>
 <div class="container">
@@ -25,7 +28,9 @@
 
     <div class="container__field">
         <div class="field"></div>
-        <div id="game-field"></div>
+        <div id="game-field">
+            <svg class="lines" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
 
         <div class="end-game popup">
             <div id="close-end" class="close"></div>
@@ -35,15 +40,16 @@
         <div class="rules-game popup">
             <div id="close-rules" class="close"></div>
             <h3 class="title">Правила игры</h3>
-            <p class="rules-game__text"><b>Участники</b> : Два игрока. Один играет красной точкой, другой – зеленой точкой.<br/>
+            <p class="rules-game__text"><b>Участники</b> : Два игрока. Один играет красной точкой, другой – зеленой
+                точкой.<br/>
                 <b>Ход игры</b> : Игроки по очереди делают ходы, ставя свою точку в свободную клетку.<br/>
                 <b>Победа</b> : Игрок побеждает, если первым составит ряд из 5 точек по прямой линии (горизонтальной,
                 вертикальной или диагональной).<br/>
-                <b>Ничья</b> : Игра считается завершённой вничью, если все клетки заполнены, и ряд из 5 точек ни у кого не
+                <b>Ничья</b> : Игра считается завершённой вничью, если все клетки заполнены, и ряд из 5 точек ни у кого
+                не
                 составился.</p>
         </div>
     </div>
-
 
 </div>
 

@@ -220,7 +220,8 @@ body {
 
 .rules {
     cursor: pointer;
-    transition: font-size 0.1s ease;
+    transition: transform 0.3s ease;
+    color: #535353;
 }
 
 .rules:hover {
@@ -228,7 +229,7 @@ body {
 }
 
 .rules:active {
-    font-size: 16px;
+    transform: scale(1.2);
 }
 
 .rules-game {
@@ -252,4 +253,20 @@ body {
     word-break: break-word; /* Перенос длинных слов */
 }
 
+.line {
+    position: absolute;
+    background-color: red;
+    height: 4px; /* Толщина линии */
+    transform-origin: 0 0;
+    z-index: 1;
+}
+
+.lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Линии не будут блокировать клики */
+}
 

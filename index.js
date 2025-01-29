@@ -8,7 +8,7 @@ let rulesGame = document.querySelector('.rules')
 let infoText = document.querySelector('.rules-game')
 let CloseRules = document.querySelector('#close-rules')
 let OpenTitle = document.querySelector('#open-title')
-
+const svg = document.querySelector('.lines')
 
 const winGamer = 5
 let pointRow = 10
@@ -26,6 +26,7 @@ function showGameField() {
 }
 
 function getGameField(pointRow, pointCol) {
+
     for (let row = 0; row < pointRow; row++) {
         for (let col = 0; col < pointCol; col++) {
             let cell = document.createElement('div')
@@ -53,6 +54,7 @@ function handleCellClick(e) {
         arrMoveGamer1.push([row, col])
         if (checkWin(arrMoveGamer1)) {
             endGame('Красный', arrColorsGamers[numGamer])
+            getMinMaxCoordinates(arrColorsGamers[numGamer])
             gameField.classList.add('blocked') // блокируется поле
             return
         }
@@ -60,6 +62,7 @@ function handleCellClick(e) {
         arrMoveGamer2.push([row, col])
         if (checkWin(arrMoveGamer2)) {
             endGame('Зеленый', arrColorsGamers[numGamer])
+            getMinMaxCoordinates(arrColorsGamers[numGamer])
             gameField.classList.add('blocked') // блокируется поле
             return
         }
@@ -123,15 +126,96 @@ function endGame(name, color) {
 }
 
 function resetGamer() {
+
+    let boardField = document.querySelectorAll('#game-field div')
+    boardField.forEach(div => {
+        div.innerHTML = ''
+        div.addEventListener('click', handleCellClick)
+    })
+
+    svg.innerHTML = ''
     arrMoveGamer1 = []
     arrMoveGamer2 = []
     numGamer = 0
-    gameField.innerHTML = '';
+
     colorIndicator.classList.remove('red', 'green')
     colorIndicator.classList.add(arrColorsGamers[numGamer])
     colorIndicator.textContent = "Красный"
     gameField.classList.remove('blocked')
-    showGameField()
+}
+
+// по координатам добавить div элементы
+function getMinMaxCoordinates(color) {
+    let allMoves = [...arrMoveGamer1, ...arrMoveGamer2]
+    const {minRowArray, maxRowArray} = getColumnMinMaxCoordinates(allMoves)
+    const arrDivElement = []
+    // перевернуть массив максимальных точек и добавить первую координату от минимальных точек
+    let arrReverse = [...maxRowArray.reverse(), minRowArray[0]]
+    // объединить в общий массив
+    const arrCells = [...minRowArray, ...arrReverse]
+    arrCells.forEach(([row, col]) => {
+        arrDivElement.push(document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`))
+    })
+
+    connectCellsWithLine(arrDivElement, color)
+}
+
+// возвращает по колонкам массивы строк с min и max координатами точек
+function getColumnMinMaxCoordinates(points) {
+    // Группируем точки по колонкам
+    const columns = {}
+
+    points.forEach(([row, col]) => {
+        if (!columns[col]) {
+            columns[col] = []
+        }
+        columns[col].push(row)
+    })
+
+    // Формируем результат в нужном формате
+    const minRowArray = []
+    const maxRowArray = []
+    Object.entries(columns).forEach(([col, rows]) => {
+        const minRow = Math.min(...rows)
+        const maxRow = Math.max(...rows)
+        minRowArray.push([minRow, parseInt(col, 10)]) // Минимум
+        maxRowArray.push([maxRow, parseInt(col, 10)]) // Максимум
+    })
+
+    return {minRowArray, maxRowArray}
+}
+
+// отрисовка линии по координатам точек игроков
+function connectCellsWithLine(cells, color) {
+    let fieldRect = gameField.getBoundingClientRect()
+    const svg = document.querySelector('.lines')
+
+    for (let i = 0; i < cells.length - 1; i++) {
+        const startCell = cells[i]
+        const endCell = cells[i + 1]
+
+        // Получаем координаты начального и конечного элементов
+        const startRect = startCell.getBoundingClientRect()
+        const endRect = endCell.getBoundingClientRect()
+
+        // Вычисляем центр ячеек
+        const startX = (startRect.left + startRect.width / 2) - fieldRect.left
+        const startY = (startRect.top + startRect.height / 2) - fieldRect.top
+        const endX = (endRect.left + endRect.width / 2) - fieldRect.left
+        const endY = (endRect.top + endRect.height / 2) - fieldRect.top
+
+        // Создаем линию
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', startX)
+        line.setAttribute('y1', startY)
+        line.setAttribute('x2', endX)
+        line.setAttribute('y2', endY)
+        line.setAttribute('stroke', color);
+        line.setAttribute('stroke-width', '2');
+
+        // Добавляем линию в SVG
+        svg.appendChild(line);
+    }
 }
 
 startOver.addEventListener('click', function () {
