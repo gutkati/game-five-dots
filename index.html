@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,10 @@
 
     </header>
 
-    <p id="color-indicator" class="subtitle">ходит: <span class="red">Красный</span></p>
+    <p id="color-indicator" class="subtitle">
+        <span class="action">ходит:</span>
+        <span class="red">красный</span>
+    </p>
 
     <div class="container__field">
         <div class="field"></div>
@@ -32,20 +35,15 @@
             <svg class="lines" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
 
-        <div class="end-game popup">
-            <div id="close-end" class="close"></div>
-            <h2 class="name-gamer">Победил: <span></span></h2>
-        </div>
-
         <div class="rules-game popup">
             <div id="close-rules" class="close"></div>
             <h3 class="title">Правила игры</h3>
-            <p class="rules-game__text"><b>Участники</b> : Два игрока. Один играет красной точкой, другой – зеленой
+            <p class="rules-game__text"><b>Участники:</b> два игрока. Один играет красной точкой, другой – зеленой
                 точкой.<br/>
-                <b>Ход игры</b> : Игроки по очереди делают ходы, ставя свою точку в свободную клетку.<br/>
-                <b>Победа</b> : Игрок побеждает, если первым составит ряд из 5 точек по прямой линии (горизонтальной,
+                <b>Ход игры:</b> игроки по очереди делают ходы, ставя свою точку в свободную клетку.<br/>
+                <b>Победа:</b> игрок побеждает, если первым составит ряд из 5 точек по прямой линии (горизонтальной,
                 вертикальной или диагональной).<br/>
-                <b>Ничья</b> : Игра считается завершённой вничью, если все клетки заполнены, и ряд из 5 точек ни у кого
+                <b>Ничья:</b> игра считается завершённой вничью, если все клетки заполнены, и ряд из 5 точек ни у кого
                 не
                 составился.</p>
         </div>

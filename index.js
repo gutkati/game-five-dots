@@ -1,18 +1,19 @@
 let gameField = document.querySelector('#game-field')
-let colorIndicator = document.querySelector('#color-indicator span')
-let showWinner = document.querySelector('.end-game')
-let closeEnd = document.querySelector('#close-end')
-let nameGamer = document.querySelector('.name-gamer span')
+let colorIndicator = document.querySelector('#color-indicator .red')
 let startOver = document.querySelector('.start-over')
 let rulesGame = document.querySelector('.rules')
 let infoText = document.querySelector('.rules-game')
 let CloseRules = document.querySelector('#close-rules')
 let OpenTitle = document.querySelector('#open-title')
+let subtitle = document.querySelector('#color-indicator .action')
 const svg = document.querySelector('.lines')
 
+let redColor = 'красный'
+let greenColor = 'зеленый'
+
 const winGamer = 5
-let pointRow = 10
-let pointCol = 17
+let pointRow = 12
+let pointCol = 24
 let numGamer = 0
 
 let arrGamers = ['gamer1', 'gamer2']
@@ -53,7 +54,7 @@ function handleCellClick(e) {
     if (arrGamers[numGamer] === 'gamer1') {
         arrMoveGamer1.push([row, col])
         if (checkWin(arrMoveGamer1)) {
-            endGame('Красный', arrColorsGamers[numGamer])
+            endGame(redColor, arrColorsGamers[numGamer])
             getMinMaxCoordinates(arrColorsGamers[numGamer])
             gameField.classList.add('blocked') // блокируется поле
             return
@@ -61,7 +62,7 @@ function handleCellClick(e) {
     } else {
         arrMoveGamer2.push([row, col])
         if (checkWin(arrMoveGamer2)) {
-            endGame('Зеленый', arrColorsGamers[numGamer])
+            endGame(greenColor, arrColorsGamers[numGamer])
             getMinMaxCoordinates(arrColorsGamers[numGamer])
             gameField.classList.add('blocked') // блокируется поле
             return
@@ -75,7 +76,7 @@ function handleCellClick(e) {
     }
 
     // Поменять имя игрока и цвет имени игрока
-    colorIndicator.textContent = `${arrGamers[numGamer] === 'gamer1' ? 'Красный' : 'Зеленый'}`
+    colorIndicator.textContent = `${arrGamers[numGamer] === 'gamer1' ? redColor : greenColor}`
     colorIndicator.classList.remove('red', 'green')
     colorIndicator.classList.add(arrColorsGamers[numGamer])
 }
@@ -117,12 +118,9 @@ function checkWin(arrMoves) {
 }
 
 function endGame(name, color) {
-    showWinner.classList.add('end-game_visible')
-    nameGamer.textContent = name
-    nameGamer.classList.add(color)
-    closeEnd.addEventListener('click', function () {
-        showWinner.classList.remove('end-game_visible')
-    })
+    subtitle.textContent = 'победил: '
+    colorIndicator.classList.add(color)
+    colorIndicator.textContent = name
 }
 
 function resetGamer() {
@@ -137,10 +135,11 @@ function resetGamer() {
     arrMoveGamer1 = []
     arrMoveGamer2 = []
     numGamer = 0
-
+    colorIndicator.innerHTML = ''
+    subtitle.textContent = 'ходит: '
     colorIndicator.classList.remove('red', 'green')
     colorIndicator.classList.add(arrColorsGamers[numGamer])
-    colorIndicator.textContent = "Красный"
+    colorIndicator.textContent = redColor
     gameField.classList.remove('blocked')
 }
 
@@ -194,17 +193,17 @@ function connectCellsWithLine(cells, color) {
         const startCell = cells[i]
         const endCell = cells[i + 1]
 
-        // Получаем координаты начального и конечного элементов
+        // Получить координаты начального и конечного элементов
         const startRect = startCell.getBoundingClientRect()
         const endRect = endCell.getBoundingClientRect()
 
-        // Вычисляем центр ячеек
+        // Вычислить центр ячеек
         const startX = (startRect.left + startRect.width / 2) - fieldRect.left
         const startY = (startRect.top + startRect.height / 2) - fieldRect.top
         const endX = (endRect.left + endRect.width / 2) - fieldRect.left
         const endY = (endRect.top + endRect.height / 2) - fieldRect.top
 
-        // Создаем линию
+        // Создать линию
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', startX)
         line.setAttribute('y1', startY)
@@ -213,13 +212,12 @@ function connectCellsWithLine(cells, color) {
         line.setAttribute('stroke', color);
         line.setAttribute('stroke-width', '2');
 
-        // Добавляем линию в SVG
+        // Добавить линию в SVG
         svg.appendChild(line);
     }
 }
 
 startOver.addEventListener('click', function () {
-    showWinner.classList.remove('end-game_visible')
     resetGamer()
 })
 
